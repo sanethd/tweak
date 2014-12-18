@@ -56,8 +56,8 @@ public class WSO2FormatTestCase {
         driver.findElement(By.id(UIElementMapper.getElement("apimng.login.pass.id"))).sendKeys("admin"); //  modified by QAA Tweek 
         driver.findElement(By.id(UIElementMapper.getElement("apimng.login.loginbutton.id"))).click(); //  modified by QAA Tweek 
         //METHOD:testLoginTestCase:end
-        //WINDOW:apimng.main
         //METHOD:testMainWindowTestCase:start
+        //WINDOW:apimng.main
         for (int second = 0; ; second++) {
             if (second >= 60) {
                 fail("timeout");

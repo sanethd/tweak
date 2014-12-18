@@ -56,8 +56,8 @@ public class WSO2FormatTestCase {
         driver.findElement(By.id("pass")).sendKeys("admin");
         driver.findElement(By.id("loginButton")).click();
         //METHOD:testLoginTestCase:end
-        //WINDOW:apimng.main
         //METHOD:testMainWindowTestCase:start
+        //WINDOW:apimng.main
         for (int second = 0; ; second++) {
             if (second >= 60) {
                 fail("timeout");

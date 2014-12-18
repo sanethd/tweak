@@ -46,7 +46,10 @@ public class WSO2FormatTestCase {
 
 
     @Test(groups = "", description = "")
-    public void testLoginTestCase throws Exception {
+    public void testLoginTestCase
+    throws Exception
+
+    {
         //METHOD:testLoginTestCase:start
         //WINDOW:apimng.login
         driver.get(baseUrl + "/publisher/design");
@@ -57,10 +60,14 @@ public class WSO2FormatTestCase {
         driver.findElement(By.id(UIElementMapper.getElement("apimng.login.loginbutton.id"))).click(); //  modified by QAA Tweek 
         //METHOD:testLoginTestCase:end
     }
-        //WINDOW:apimng.main
+
     @Test(groups = "", description = "")
-    public void testMainWindowTestCase throws Exception {
+    public void testMainWindowTestCase
+    throws Exception
+
+    {
         //METHOD:testMainWindowTestCase:start
+        //WINDOW:apimng.main
         for (int second = 0; ; second++) {
             if (second >= 60) {
                 fail("timeout");

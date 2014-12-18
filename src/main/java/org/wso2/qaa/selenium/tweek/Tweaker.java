@@ -177,7 +177,7 @@ public class Tweaker {
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             currentLine = line;
-            String[] tempTestClassFileArray = fullFilPath.replace(".java", "").replaceAll("TweakP1", "").split(File.separator);
+            String[] tempTestClassFileArray = fullFilPath.replace(".java", "").replaceAll("TweakP1", "").split(String.valueOf(File.separatorChar));
             String testClassname = tempTestClassFileArray[tempTestClassFileArray.length - 1];
             if (line.contains("test" + testClassname)) {
                 testMethodStart = true;
@@ -188,7 +188,7 @@ public class Tweaker {
             if (testMethodStart) {
                 if (methodLineCount == 2) {
                     if (!line.contains("METHOD")) {
-                        new RuntimeException("Method tag not found  as the first line in the recorded test method");
+                        throw new RuntimeException("Method tag not found  as the first line in the recorded test method");
                     }
                 }
                 if (methodLineCount > 1) {
@@ -205,7 +205,7 @@ public class Tweaker {
                             writer.println(line);
                             writer.println("    }");
                         } else {
-                            new RuntimeException("Illegal method status. Mathod status can only be start or stop. METHOD:methodName:start or METHOD:methodName:stop");
+                            throw new RuntimeException("Illegal method status. Mathod status can only be start or stop. METHOD:methodName:start or METHOD:methodName:stop");
                         }
                     } else {
                         if (!(prvLine.contains(":end") && currentLine.contains("}"))) {

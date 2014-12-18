@@ -35,7 +35,7 @@ import java.util.Properties;
 public class PropertyFileHandler {
     private static final Log log = LogFactory.getLog(PropertyFileHandler.class);
 
-    private static Properties uiProperties = null;
+    private Properties uiProperties = null;
 
     /**
      * Load the property file if available ble inb the given location. If not create a new property file wi th ethe given name.
@@ -46,8 +46,13 @@ public class PropertyFileHandler {
     public PropertyFileHandler(String fullFilePath) throws IOException {
         File file = new File(fullFilePath);
         if (!file.exists()) {
-            file.createNewFile();
-            log.info("Property file created :" + fullFilePath);
+            boolean isFileCreated = file.createNewFile();
+            if (isFileCreated) {
+                log.info("Property file created :" + fullFilePath);
+            } else {
+                log.info("Property file  not created:" + fullFilePath);
+                throw new RuntimeException("Property file cannot be created");
+            }
         } else {
             log.info("Property already available at :" + fullFilePath);
         }
@@ -110,9 +115,16 @@ public class PropertyFileHandler {
      * @throws IOException
      */
     public void savePropertyFile(String fullFilePath) throws IOException {
-        OutputStream outputStream = new FileOutputStream(fullFilePath);
-        uiProperties.store(outputStream, null);
-        outputStream.close();
+        OutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(fullFilePath);
+            uiProperties.store(outputStream, null);
+        } finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+
     }
 
 
